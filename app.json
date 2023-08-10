@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-sqlite-tutorial",
-    "slug": "expo-sqlite-tutorial",
+    "name": "SysquantizedAuth",
+    "slug": "SysquantizedAuth",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,13 +20,15 @@
     "ios": {
       "supportsTablet": true,
       "usesIcloudStorage": true,
-      "bundleIdentifier": "com.misscoding.sqliteexample"
+      "bundleIdentifier": "com.blackbox.SysquantizedAuth",
+      "NSFaceIDUsageDescription": "This app uses Touch Id to verify the User's identity and protect sensitive data."
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#fff"
+      },
+      "package": "com.android.SysquantizedAuth"
     },
     "web": {
       "favicon": "./assets/favicon.png"
