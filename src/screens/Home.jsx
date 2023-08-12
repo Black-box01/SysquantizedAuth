@@ -28,7 +28,7 @@ const Home = () => {
   const [query, setQuery] = useState('')
   const [sec, setSec] = useState(30);
   const [tC, setTC] = useState(false)
-  const [copy, setCopy] = useState(true)
+  const [copy, setCopy] = useState()
   let numColumns = 2
 
   useEffect(() => {
