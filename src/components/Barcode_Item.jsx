@@ -9,11 +9,36 @@ const Barcode_Item = ({ route }) => {
   const secure = route.params.secure;
   const theme = useContext(themeContext);
   const navigation = useNavigation()
-  const [db, setDb] = useState(SQLite.openDatabase('example2.db'));
+  const [db, setDb] = useState(SQLite.openDatabase('SysquantizedAuth2.db'));
   const [isLoading, setIsLoading] = useState(true);
   const [names, setNames] = useState([]);
   const [currentName, setCurrentName] = useState(undefined);
   const [currentNote, setCurrentNote] = useState(undefined);
+
+  const importDb = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+      copyToCacheDirectory: true
+    });
+
+    if (result.type === 'success') {
+      setIsLoading(true);
+
+      if (!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + 'SQLite')).exists) {
+        await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'SQLite');
+      }
+
+      const base64 = await FileSystem.readAsStringAsync(
+        result.uri,
+        {
+          encoding: FileSystem.EncodingType.Base64
+        }
+      );
+
+      await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + 'SQLite/SysquantizedAuth2.db', base64, { encoding: FileSystem.EncodingType.Base64 });
+      await db.closeAsync();
+      setDb(SQLite.openDatabase('SysquantizedAuth2.db'));
+    }
+  };
 
   useEffect(() => {
     db.transaction(tx => {

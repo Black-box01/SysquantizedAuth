@@ -9,6 +9,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native'
 import * as SQLite from 'expo-sqlite';
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 import themeContext from "../config/themeContext";
+import * as Clipboard from "expo-clipboard";
 
 
 const Home = () => {
@@ -16,10 +17,8 @@ const Home = () => {
   const navigation = useNavigation()
   const focused = useIsFocused()
 
-  const [db, setDb] = useState(SQLite.openDatabase('SysquantizedAuth.db'));
-  const [isLoading, setIsLoading] = useState(true);
+  const [db, setDb] = useState(SQLite.openDatabase('SysquantizedAuth2.db'));
   const [names, setNames] = useState([]);
-  const [currentName, setCurrentName] = useState(undefined);
 
   const [bg, setBg] = useState(true)
   const BottomSheetModalRef = useRef(null);
@@ -28,6 +27,8 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false)
   const [query, setQuery] = useState('')
   const [sec, setSec] = useState(30);
+  const [tC, setTC] = useState(false)
+  const [copy, setCopy] = useState(true)
   let numColumns = 2
 
   useEffect(() => {
@@ -88,13 +89,31 @@ const Home = () => {
     var t2 = t1
     var t3 = 30 - t2
   }
+
+  setTimeout(() => {
+    if(t3 <= 11){
+      setTC(true)
+    }else if(t3 >=11 || t3 == 30){
+      setTC(false)
+    }else{
+      setTC(false)
+    }
+  }, 1000)
   
+  const copyText = (text) => {
+    Clipboard.setStringAsync(text);
+    setCopy(true)
+    setTimeout(() => {
+      setCopy(false)
+    }, 3000)
+  }
   
+    
 
   return (
     <BottomSheetModalProvider>
       <SafeAreaView style={[{ backgroundColor: bg ? theme.background : 'gray', flex: 1, color: bg ? 'black' : 'white' }]}>
-        <Text style={{  color: 'red', fontSize: 18, textAlign: 'center', marginTop: 10, marginBottom: 5 }}>Sysquantized Auth</Text>
+        <Text style={{  color: 'white', fontSize: 28, textAlign: 'center', fontWeight: 'bold', backgroundColor: '#0078d4', lineHeight: 40,}}>Sysquantized Auth</Text>
         <View style={{ width: '100%', alignItems: 'center' }}>
           <View style={styles.container}>
             <Image source={SysquantizedAuth} style={{ width: 25, height: 25, borderRadius: 50, backgroundColor: 'white' }} />
@@ -119,20 +138,20 @@ const Home = () => {
                 if (item.name.toLowerCase().includes(query.toLowerCase())) {
 
                   return (
-                    <TouchableOpacity onPress={() => setToggle(!toggle)} style={{ width: '48%', borderRadius: 15, backgroundColor: theme.theme, marginHorizontal: 3, borderWidth: 2, borderColor: theme.theme, marginBottom: 10}} key={index}>
+                    <TouchableOpacity onPress={(index) => {setToggle(!toggle), copyText(hi)}} style={{ width: '48%', borderRadius: 15, backgroundColor: theme.theme, marginHorizontal: 3, borderWidth: 2, borderColor: tC ? 'red' : 'white', marginBottom: 10}} key={index}>
                       <View style={{flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 15, paddingVertical: 15}}>
                         <View>
                           <Image source={SysquantizedAuth} style={{ width: 35, height: 35, borderRadius: 10, backgroundColor: 'white' }} />
-                          <Text style={{  fontSize: 12, letterSpacing: 1.2, color: theme.color, textAlign: 'center', marginTop: 5 }}>{item.name}</Text>
+                          <Text style={{  fontSize: 12, letterSpacing: 1.2, color: theme.background, textAlign: 'center', marginTop: 5 }}>{item.name}</Text>
                         </View>
-                        <View style={{ borderWidth: 2, borderRadius: 50, borderColor: 'red', width: 25, height: 25, alignItems: 'center', justifyContent: 'center' }}>
-                          <Text style={{ fontSize: 13, color: 'black' }}>{t3}</Text>
+                        <View style={{ borderWidth: 2, borderRadius: 50, borderColor: tC ? 'red' : '#0078d4', width: 25, height: 25, alignItems: 'center', justifyContent: 'center' }}>
+                          <Text style={{ fontSize: 13, color: tC ? 'red' : '#0078d4' }}>{t3}</Text>
                         </View>
                       </View>
 
-                      <View style={{backgroundColor: 'grey', borderBottomLeftRadius: 15, borderBottomRightRadius: 15}}>
+                      <View style={{backgroundColor: '#0078d4', borderBottomLeftRadius: 15, borderBottomRightRadius: 15}}>
                         <View>
-                          <Text style={{ fontSize: 18,  letterSpacing: 5, color: 'white', textAlign: 'center', paddingTop: 10, paddingBottom: 5 }}>{hi}</Text>
+                          <Text style={{ fontSize: 21,  letterSpacing: 5, color: tC ? '#A52A2A' : 'white', textAlign: 'center', paddingTop: 10, paddingBottom: 5, fontWeight: 'bold' }} selectable={true}>{hi}</Text>
                         </View>
                         {toggle ?
                           <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 15, paddingBottom: 5}}>
@@ -146,11 +165,14 @@ const Home = () => {
                 }
               }}
             />
+            
+        {copy ? 
+        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 50,}}><Text style={{color: theme.background, padding: 10, borderRadius: 30, backgroundColor: theme.color, fontWeight: 'bold', width: 140, textAlign: 'center'}}>Token Copied!</Text></View> : null}
           </View>
         }
 
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end', marginBottom: 10 }}>
-          <View style={{ padding: 0, backgroundColor: 'red', borderRadius: 50, alignItems: 'center', justifyContent: 'center', width: 60, height: 60 }}>
+          <View style={{ padding: 0, backgroundColor: 'red', borderRadius: 50, alignItems: 'center', justifyContent: 'center', width: 60, height: 60, borderWidth: 2, borderColor: '#fff' }}>
             <Ionicons onPress={handlePresentModal} name="add" size={35} color="white" />
           </View>
         </View>
@@ -179,16 +201,15 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 35,
-    width: '85%',
+    height: 40,
+    width: '100%',
     backgroundColor: '#f2f4f2',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
-    paddingHorizontal: 13,
+    paddingHorizontal: 20,
     marginBottom: 15,
-    marginTop: 10,
+    marginTop: 0,
   },
   list_container: {
     marginLeft: '12.5%'

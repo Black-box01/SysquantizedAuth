@@ -11,7 +11,7 @@ import themeContext from "../config/themeContext";
 export default function AddToken() {
   const theme = useContext(themeContext);
   const navigation = useNavigation()
-  const [db, setDb] = useState(SQLite.openDatabase('SysquantizedAuth.db'));
+  const [db, setDb] = useState(SQLite.openDatabase('SysquantizedAuth2.db'));
   const [isLoading, setIsLoading] = useState(true);
   const [names, setNames] = useState([]);
   const [currentName, setCurrentName] = useState(undefined);
@@ -37,9 +37,9 @@ export default function AddToken() {
         }
       );
 
-      await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + 'SQLite/SysquantizedAuth.db', base64, { encoding: FileSystem.EncodingType.Base64 });
+      await FileSystem.writeAsStringAsync(FileSystem.documentDirectory + 'SQLite/SysquantizedAuth2.db', base64, { encoding: FileSystem.EncodingType.Base64 });
       await db.closeAsync();
-      setDb(SQLite.openDatabase('SysquantizedAuth.db'));
+      setDb(SQLite.openDatabase('SysquantizedAuth2.db'));
     }
   };
 
@@ -91,7 +91,7 @@ export default function AddToken() {
       </View>
       <View style={styles.content}>
         <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', width: '80%' }}>
-          <Text style={{ fontSize: 20, marginVertical: 30, letterSpacing: 1, color: theme.color }}>Service Information</Text>
+          <Text style={{ fontSize: 20, marginVertical: 30, letterSpacing: 1, color: theme.color, textAlign: 'center', }}>Service Information</Text>
           <Text style={styles.name}>Service Name</Text>
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Application Name' value={currentName} onChangeText={txt => setCurrentName(txt)} />
           <Text style={styles.name}>Secret Name </Text>
@@ -117,9 +117,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
   name: {
-    color: 'red',
+    color: 'white',
     letterSpacing: 1,
-    fontSize: 16
+    fontSize: 18,
+    fontWeight: 'bold'
   },
   input: {
     height: 50,

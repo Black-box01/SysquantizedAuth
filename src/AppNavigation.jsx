@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   const theme = useContext(themeContext);
   return (
-    <Tab.Navigator screenOptions={{headerTintColor: 'red', headerTitleAlign: 'center', headerStyle: {backgroundColor: theme.background}, tabBarInactiveTintColor: 'gray', tabBarActiveTintColor: 'red', tabBarLabelStyle: { fontSize: 13}, tabBarStyle: {backgroundColor: theme.background}}}>
+    <Tab.Navigator screenOptions={{headerTintColor: '#0078d4', headerTitleAlign: 'center', headerStyle: {backgroundColor: theme.background}, tabBarInactiveTintColor: 'gray', tabBarActiveTintColor: '#0078d4', tabBarLabelStyle: { fontSize: 18, fontWeight: 'bold'}, tabBarStyle: {backgroundColor: theme.background}}}>
       <Tab.Screen
         name='Home'
         component={Home}
@@ -38,7 +38,7 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={
-        {headerTintColor: 'red', headerTitleAlign: 'center', headerStyle: {backgroundColor: theme.background},}
+        {headerTintColor: '#0078d4', headerTitleAlign: 'center', headerStyle: {backgroundColor: theme.background},}
       }>
         <Stack.Screen
           name='Home2'
