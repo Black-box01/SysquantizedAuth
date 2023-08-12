@@ -92,11 +92,11 @@ export default function AddToken() {
       <View style={styles.content}>
         <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', width: '80%' }}>
           <Text style={{ fontSize: 20, marginVertical: 30, letterSpacing: 1, color: theme.color, textAlign: 'center', }}>Service Information</Text>
-          <Text style={styles.name}>Service Name</Text>
+          <Text style={[styles.name, {color: theme.color}]}>Service Name</Text>
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Application Name' value={currentName} onChangeText={txt => setCurrentName(txt)} />
-          <Text style={styles.name}>Secret Name </Text>
+          <Text style={[styles.name, {color: theme.color}]}>Secret ID </Text>
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Secure ID' value={currentSecureId} onChangeText={txt => setCurrentSecureId(txt)} />
-          <Text style={styles.name}>Application Info</Text>
+          <Text style={[styles.name, {color: theme.color}]}>Application Info</Text>
           <TextInput style={[styles.area, { backgroundColor: 'white' }]} multiline={true}
             numberOfLines={4} placeholder='More Personal Info' value={currentNote} onChangeText={txt => setCurrentNote(txt)} />
           <Button title="Add Token" onPress={addName} />
@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   name: {
-    color: 'white',
     letterSpacing: 1,
     fontSize: 18,
     fontWeight: 'bold'

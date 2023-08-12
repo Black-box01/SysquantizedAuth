@@ -82,17 +82,17 @@ const Barcode_Item = ({ route }) => {
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: theme.background }]}>
-      <View style={styles.content}>
         <View style={{ alignItems: 'center', justifyContent: 'center', }}>
-          <TouchableOpacity style={{ width: '70%', alignItems: 'center', backgroundColor: 'red', height: 30, justifyContent: 'center', borderRadius: 10 }} onPress={() => importDb()}><Text style={{ color: '#fff', fontWeight: 'bold', letterSpacing: 0.7, fontSize: 15 }}>Import DataBase</Text></TouchableOpacity>
+          <TouchableOpacity style={{ width: '70%', alignItems: 'center', backgroundColor: 'red', height: 30, justifyContent: 'center', borderRadius: 10}} onPress={() => importDb()}><Text style={{ color: '#fff', fontWeight: 'bold', letterSpacing: 0.7, fontSize: 15 }}>Import DataBase</Text></TouchableOpacity>
         </View>
+      <View style={styles.content}>
         <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', width: '80%' }}>
-          <Text style={{ fontSize: 20, marginVertical: 30, letterSpacing: 1, color: theme.color }}>Service Information</Text>
-          <Text style={styles.name}>Service Name</Text>
+          <Text style={{ fontSize: 20, marginVertical: 30, letterSpacing: 1, color: theme.color, textAlign: 'center'}}>Service Information</Text>
+          <Text style={[styles.name, {color: theme.color}]}>Service ID</Text>
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Application Name' value={currentName} onChangeText={txt => setCurrentName(txt)} />
-          <Text style={styles.name}>Secret Name </Text>
+          <Text style={[styles.name, {color: theme.color}]}>Secret Name </Text>
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Secure ID' value={secure} />
-          <Text style={styles.name}>Application Info</Text>
+          <Text style={[styles.name, {color: theme.color}]}>Application Info</Text>
           <TextInput style={[styles.area, { backgroundColor: 'white' }]} multiline={true}
             numberOfLines={4} placeholder='More Personal Info' value={currentNote} onChangeText={txt => setCurrentNote(txt)} />
           <Button title="Add Token" onPress={addName} />
@@ -112,9 +112,9 @@ const styles = StyleSheet.create({
     flex: 1
   },
   name: {
-    color: 'red',
     letterSpacing: 1,
-    fontSize: 16
+    fontSize: 18,
+    fontWeight: 'bold'
   },
   input: {
     height: 50,
