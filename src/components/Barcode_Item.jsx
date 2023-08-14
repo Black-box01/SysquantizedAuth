@@ -38,6 +38,7 @@ const Barcode_Item = ({ route }) => {
       await db.closeAsync();
       setDb(SQLite.openDatabase('SysquantizedAuth2.db'));
     }
+    navigation.navigate('Home2')
   };
 
   useEffect(() => {
@@ -92,6 +93,8 @@ const Barcode_Item = ({ route }) => {
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Application Name' value={currentName} onChangeText={txt => setCurrentName(txt)} />
           <Text style={[styles.name, {color: theme.color}]}>Secret Name </Text>
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Secure ID' value={secure} />
+          <Text style={{color: 'red', fontSize: 12}}>* Secure Id should not be separated with a space.</Text>
+          <Text style={{color: 'red', fontSize: 12, marginBottom: 30}}>* Secure Id should be 32 characters</Text>
           <Text style={[styles.name, {color: theme.color}]}>Application Info</Text>
           <TextInput style={[styles.area, { backgroundColor: 'white' }]} multiline={true}
             numberOfLines={4} placeholder='More Personal Info' value={currentNote} onChangeText={txt => setCurrentNote(txt)} />

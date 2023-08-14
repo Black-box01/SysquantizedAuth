@@ -41,6 +41,7 @@ export default function AddToken() {
       await db.closeAsync();
       setDb(SQLite.openDatabase('SysquantizedAuth2.db'));
     }
+    navigation.navigate('Home2')
   };
 
   useEffect(() => {
@@ -95,11 +96,13 @@ export default function AddToken() {
           <Text style={[styles.name, {color: theme.color}]}>Service Name</Text>
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Application Name' value={currentName} onChangeText={txt => setCurrentName(txt)} />
           <Text style={[styles.name, {color: theme.color}]}>Secret ID </Text>
-          <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Secure ID' value={currentSecureId} onChangeText={txt => setCurrentSecureId(txt)} />
+          <TextInput style={[styles.input, { backgroundColor: 'white', marginBottom: 10 }]} placeholder='Secure ID' value={currentSecureId} onChangeText={txt => setCurrentSecureId(txt)} />
+          <Text style={{color: 'red', fontSize: 12}}>* Secure Id should not be separated with a space.</Text>
+          <Text style={{color: 'red', fontSize: 12, marginBottom: 30}}>* Secure Id should be 32 characters</Text>
           <Text style={[styles.name, {color: theme.color}]}>Application Info</Text>
           <TextInput style={[styles.area, { backgroundColor: 'white' }]} multiline={true}
             numberOfLines={4} placeholder='More Personal Info' value={currentNote} onChangeText={txt => setCurrentNote(txt)} />
-          <Button title="Add Token" onPress={addName} />
+          <Button title="Add Token" onPress={addName}/>
         </View>
       </View>
     </ScrollView>
