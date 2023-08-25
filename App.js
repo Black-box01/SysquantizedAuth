@@ -33,7 +33,7 @@ export default function App() {
 
   return (
     <themeContext.Provider value={mode === true ? theme.dark : theme.light}>
-      {isAuth ? <AppNavigation /> : <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Text style={{textAlign: 'center', fontSize: 25}}>Authentication Failed!!!</Text></View>}
+      {isAuth ? <AppNavigation /> : <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Text style={{textAlign: 'center', fontSize: 25}}>USER NOT AUTHENTICATED!</Text></View>}
       <StatusBar hidden={true} />
     </themeContext.Provider>
   );

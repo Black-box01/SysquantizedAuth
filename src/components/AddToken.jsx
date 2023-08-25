@@ -17,6 +17,7 @@ export default function AddToken() {
   const [currentName, setCurrentName] = useState(undefined);
   const [currentSecureId, setCurrentSecureId] = useState(undefined);
   const [currentNote, setCurrentNote] = useState(undefined);
+  const [disabled, setDisabled] = useState(true)
 
   const importDb = async () => {
     let result = await DocumentPicker.getDocumentAsync({
@@ -83,26 +84,33 @@ export default function AddToken() {
       );
     });
   }
-
+  
+  setInterval(() => {
+    if (currentSecureId != undefined) {
+      if (currentSecureId.length === 16 || currentSecureId.length === 32) {
+        setDisabled(false)
+      }
+    }
+  }, 1000);
 
   return (
     <ScrollView style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={{ alignItems: 'center', justifyContent: 'center', }}>
-        <TouchableOpacity style={{ width: '70%', alignItems: 'center', backgroundColor: 'red', height: 30, justifyContent: 'center', borderRadius: 10}} onPress={() => importDb()}><Text style={{color: '#fff', fontWeight: 'bold', letterSpacing: 0.7, fontSize: 15}}>Import DataBase</Text></TouchableOpacity>
+        <TouchableOpacity style={{ width: '70%', alignItems: 'center', backgroundColor: 'red', height: 30, justifyContent: 'center', borderRadius: 10 }} onPress={() => importDb()}><Text style={{ color: '#fff', fontWeight: 'bold', letterSpacing: 0.7, fontSize: 15 }}>Import DataBase</Text></TouchableOpacity>
       </View>
       <View style={styles.content}>
         <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start', width: '80%' }}>
           <Text style={{ fontSize: 20, marginVertical: 30, letterSpacing: 1, color: theme.color, textAlign: 'center', }}>Service Information</Text>
-          <Text style={[styles.name, {color: theme.color}]}>Service Name</Text>
+          <Text style={[styles.name, { color: theme.color }]}>Service Name</Text>
           <TextInput style={[styles.input, { backgroundColor: 'white' }]} placeholder='Application Name' value={currentName} onChangeText={txt => setCurrentName(txt)} />
-          <Text style={[styles.name, {color: theme.color}]}>Secret ID </Text>
+          <Text style={[styles.name, { color: theme.color }]}>Secret ID </Text>
           <TextInput style={[styles.input, { backgroundColor: 'white', marginBottom: 10 }]} placeholder='Secure ID' value={currentSecureId} onChangeText={txt => setCurrentSecureId(txt)} />
-          <Text style={{color: 'red', fontSize: 12}}>* Secure Id should not be separated with a space.</Text>
-          <Text style={{color: 'red', fontSize: 12, marginBottom: 30}}>* Secure Id should be 32 characters</Text>
-          <Text style={[styles.name, {color: theme.color}]}>Application Info</Text>
+          <Text style={{ color: 'red', fontSize: 12 }}>* Secure Id should not be separated with a space.</Text>
+          <Text style={{ color: 'red', fontSize: 12, marginBottom: 30 }}>* Secure Id should be 32 characters</Text>
+          <Text style={[styles.name, { color: theme.color }]}>Application Info</Text>
           <TextInput style={[styles.area, { backgroundColor: 'white' }]} multiline={true}
             numberOfLines={4} placeholder='More Personal Info' value={currentNote} onChangeText={txt => setCurrentNote(txt)} />
-          <Button title="Add Token" onPress={addName}/>
+          <Button title="Add Token" onPress={addName} disabled={disabled} />
         </View>
       </View>
     </ScrollView>

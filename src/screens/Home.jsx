@@ -113,7 +113,7 @@ const Home = () => {
   return (
     <BottomSheetModalProvider>
       <SafeAreaView style={[{ backgroundColor: bg ? theme.background : 'gray', flex: 1, color: bg ? 'black' : 'white' }]}>
-        <Text style={{  color: 'white', fontSize: 28, textAlign: 'center', fontWeight: 'bold', backgroundColor: '#0078d4', lineHeight: 40,}}>Sysquantized Auth</Text>
+        <Text style={{  color: 'white', fontSize: 28, textAlign: 'center', fontWeight: 'bold', backgroundColor: '#0078d4', lineHeight: 40,}}>SysquantizedAuth</Text>
         <View style={{ width: '100%', alignItems: 'center' }}>
           <View style={styles.container}>
             <Image source={SysquantizedAuth} style={{ width: 25, height: 25, borderRadius: 50, backgroundColor: 'white' }} />
