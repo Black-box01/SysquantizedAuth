@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { StyleSheet, Text, View, TextInput, Button, Platform, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, ScrollView, TouchableOpacity } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import { useState, useEffect } from 'react';
-import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
 import * as DocumentPicker from 'expo-document-picker';
 import themeContext from "../config/themeContext";
@@ -53,7 +52,6 @@ export default function AddToken() {
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM names', null,
         (txObj, resultSet) => setNames(resultSet.rows._array),
-        (txObj, error) => console.log(error)
       );
     });
 
@@ -80,7 +78,6 @@ export default function AddToken() {
           setCurrentNote(undefined);
           navigation.navigate('Home2')
         },
-        (txObj, error) => console.log(error)
       );
     });
   }

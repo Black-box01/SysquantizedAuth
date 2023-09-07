@@ -1,6 +1,5 @@
 import "react-native-gesture-handler";
-import { StatusBar } from 'expo-status-bar';
-import { View, SafeAreaView, Image, TextInput, StyleSheet, Text, TouchableOpacity, FlatList, RefreshControl, Button, Switch, Dimensions } from 'react-native'
+import { View, SafeAreaView, Image, TextInput, StyleSheet, Text, TouchableOpacity, FlatList, RefreshControl } from 'react-native'
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import SysquantizedAuth from '../../assets/icon.png'
 import { Feather, Ionicons, FontAwesome, MaterialIcons } from '@expo/vector-icons';
@@ -35,7 +34,6 @@ const Home = () => {
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM names', null,
         (txObj, resultSet) => setNames(resultSet.rows._array),
-        (txObj, error) => console.log(error)
       );
     });
   }, [focused]);
@@ -49,7 +47,6 @@ const Home = () => {
             setNames(existingNames);
           }
         },
-        (txObj, error) => console.log(error)
       );
     });
   };
@@ -134,7 +131,22 @@ const Home = () => {
                 />
               }
               renderItem={({ item, index }) => {
-                let hi = totp(item.token)
+                 let hi = totp(item.token)
+                //  if (isNaN(hi)) {
+                //   hi = 'Invalid secured ID'
+                // }
+                
+                // try{
+                //     if (isNaN(hi)) {
+                //       throw('Secured Id is not valid')
+                //     }
+                // }
+                // catch(e){
+                //       console.table(e.name)
+                //       console.table(e.message)
+                //       hi = 'Invalid secured ID'
+                // }
+
                 if (item.name.toLowerCase().includes(query.toLowerCase())) {
 
                   return (

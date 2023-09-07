@@ -1,13 +1,11 @@
 import { View, Text, ScrollView, StyleSheet, Switch, TouchableOpacity, Alert } from 'react-native'
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Feather, MaterialIcons, MaterialCommunityIcons, Entypo, FontAwesome5, AntDesign } from '@expo/vector-icons';
 import { EventRegister } from 'react-native-event-listeners'
 import themeContext from "../config/themeContext";
 import { useNavigation } from '@react-navigation/native';
-import * as SQLite from 'expo-sqlite';
 import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
-import * as DocumentPicker from 'expo-document-picker';
 
 const Settings = (props) => {
   const navigation = useNavigation()
@@ -30,10 +28,7 @@ const Settings = (props) => {
         .then(async (uri) => {
           await FileSystem.writeAsStringAsync(uri, base64, { encoding : FileSystem.EncodingType.Base64 });
         })
-        .catch((e) => console.log(e));
-      } else {
-        console.log("Permission not granted");
-      }
+      } 
     } else {
       await Sharing.shareAsync(FileSystem.documentDirectory + 'SQLite/SysquantizedAuth2.db');
     }

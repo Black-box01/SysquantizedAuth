@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#2f86fa"
     },
     "updates": {
@@ -21,7 +21,9 @@
       "supportsTablet": true,
       "usesIcloudStorage": true,
       "bundleIdentifier": "com.blackbox.SysquantizedAuth",
-      "NSFaceIDUsageDescription": "This app uses Touch Id to verify the User's identity and protect sensitive data."
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "This app uses Touch Id to verify the User's identity and protect sensitive data."
+      }
     },
     "android": {
       "adaptiveIcon": {

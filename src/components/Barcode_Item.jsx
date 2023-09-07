@@ -50,7 +50,6 @@ const Barcode_Item = ({ route }) => {
     db.transaction(tx => {
       tx.executeSql('SELECT * FROM names', null,
         (txObj, resultSet) => setNames(resultSet.rows._array),
-        (txObj, error) => console.log(error)
       );
     });
 
@@ -76,7 +75,6 @@ const Barcode_Item = ({ route }) => {
           setCurrentNote(undefined);
           navigation.navigate('Home2')
         },
-        (txObj, error) => console.log(error)
       );
     });
   }

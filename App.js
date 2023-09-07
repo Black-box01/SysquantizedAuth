@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import AppNavigation from "./src/AppNavigation";
 import { EventRegister } from "react-native-event-listeners";
